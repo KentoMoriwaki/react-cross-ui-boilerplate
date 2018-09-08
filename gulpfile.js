@@ -14,7 +14,7 @@ const runSequence = require("run-sequence");
 const getBuildConfig = require("./buildconfig");
 const babelrc = require("./.babelrc");
 
-const config = getBuildConfig("web");
+const config = getBuildConfig("ios");
 
 function handleError(err) {
   console.log(err.toString());
