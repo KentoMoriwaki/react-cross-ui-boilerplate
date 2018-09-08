@@ -8,6 +8,7 @@ const cached = require("gulp-cached");
 const babel = require("gulp-babel");
 const del = require("del");
 const eol = require("gulp-eol");
+const shell = require("gulp-shell");
 const runSequence = require("run-sequence");
 
 const getBuildConfig = require("./buildconfig");
@@ -79,3 +80,10 @@ gulp.task("babel", () =>
 gulp.task("build", callback => {
   runSequence(["babel"], callback);
 });
+
+gulp.task(
+  "watch",
+  shell.task(
+    "node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --watch"
+  )
+);

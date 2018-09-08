@@ -2,14 +2,14 @@ import * as React from "react";
 import { View, Text } from "react-primitives";
 import { LinearGradient } from "modules/linear-gradient";
 
-const MyButton = () => {
+const Button = ({ children }) => {
   return (
     <View>
       <LinearGradient>
-        <Text>Hello, World!</Text>
+        <Text>{children}</Text>
       </LinearGradient>
     </View>
   );
 };
 
-export default MyButton;
+export default Button;
