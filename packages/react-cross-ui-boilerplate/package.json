@@ -6,7 +6,8 @@
   "author": "KentoMoriwaki <kento@wantedly.com>",
   "license": "MIT",
   "dependencies": {
-
+    "react-native-linear-gradient": "^2.4.2",
+    "react-native-web-linear-gradient": "^1.0.2"
   },
   "devDependencies": {
     "react": "^16.5.0",

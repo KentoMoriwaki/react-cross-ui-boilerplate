@@ -1,6 +1,6 @@
 import * as React from "react";
-import RP from "react-primitives";
+import { View } from "react-primitives";
 
 export const App = () => {
-  return <RP.View>Hello, World!</RP.View>;
+  return <View>Hello, World!</View>;
 };
