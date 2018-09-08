@@ -1,7 +1,7 @@
 {
-  "name": "react-cross-ui-boilterplate",
+  "name": "react-cross-ui-boilerplate",
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "dist/index.web.js",
   "repository": "https://github.com/KentoMoriwaki/react-cross-ui-boilerplate",
   "author": "KentoMoriwaki <kento@wantedly.com>",
   "license": "MIT",
@@ -10,15 +10,15 @@
     "react-native-web-linear-gradient": "^1.0.2"
   },
   "devDependencies": {
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0",
+    "react": "16.4.0",
+    "react-dom": "16.4.0",
     "react-native": "^0.56.0",
     "react-native-web": "^0.8.9",
     "react-primitives": "^0.6.1"
   },
   "peerDependencies": {
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0",
+    "react": "16.4.0",
+    "react-dom": "16.4.0",
     "react-native": "^0.56.0",
     "react-native-web": "^0.8.9",
     "react-primitives": "^0.6.1"

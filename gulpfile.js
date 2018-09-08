@@ -10,9 +10,10 @@ const del = require("del");
 const eol = require("gulp-eol");
 const runSequence = require("run-sequence");
 
-const aliases = {
-  "modules/linearGradient": "modules/linearGradient.web"
-};
+const getBuildConfig = require("./buildconfig");
+const babelrc = require("./.babelrc");
+
+const config = getBuildConfig("web");
 
 function handleError(err) {
   console.log(err.toString());
@@ -69,12 +70,8 @@ const dist = path.resolve(
 gulp.task("babel", () =>
   gulp
     .src(src)
-    .pipe(
-      babel({
-        presets: ["@babel/env", "@babel/react", "@babel/typescript"]
-      })
-    )
-    .pipe(aliasify(aliases))
+    .pipe(babel(babelrc))
+    .pipe(aliasify(config.aliases))
     .pipe(gulp.dest(dist))
     .on("error", handleError)
 );
