@@ -22,6 +22,6 @@
     "expo": "^27.0.1",
     "react": "16.3.1",
     "react-native": "~0.55.2",
-    "react-cross-ui-boilerplate": "file:../../packages/react-cross-ui-boilerplate"
+    "react-cross-ui-boilerplate": "file:../.."
   }
 }

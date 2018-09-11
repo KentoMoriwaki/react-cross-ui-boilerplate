@@ -5417,11 +5417,10 @@ react-clone-referenced-element@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-clone-referenced-element/-/react-clone-referenced-element-1.0.1.tgz#2bba8c69404c5e4a944398600bcc4c941f860682"
 
-"react-cross-ui-boilerplate@file:../../packages/react-cross-ui-boilerplate":
+"react-cross-ui-boilerplate@file:../..":
   version "0.1.0"
   dependencies:
     react-native-linear-gradient "^2.4.2"
-    react-native-web-linear-gradient "^1.0.2"
 
 react-deep-force-update@^1.0.0:
   version "1.1.2"
@@ -5529,10 +5528,6 @@ react-native-vector-icons@4.5.0:
     lodash "^4.0.0"
     prop-types "^15.5.10"
     yargs "^8.0.2"
-
-react-native-web-linear-gradient@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-web-linear-gradient/-/react-native-web-linear-gradient-1.0.2.tgz#122dc158273833b315cf0dfc9ded74719fbbc153"
 
 react-native-web-maps@^0.1.0:
   version "0.1.0"
