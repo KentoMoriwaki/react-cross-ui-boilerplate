@@ -14,7 +14,7 @@ const runSequence = require("run-sequence");
 const getBuildConfig = require("./buildconfig");
 const babelrc = require("./.babelrc");
 
-const config = getBuildConfig("ios");
+const config = getBuildConfig("web");
 
 function handleError(err) {
   console.log(err.toString());
@@ -58,15 +58,9 @@ function aliasify(aliases) {
     .on("error", handleError);
 }
 
-const src = path.resolve(
-  __dirname,
-  "packages/react-cross-ui-boilerplate/src/**/*"
-);
+const src = path.resolve(__dirname, "src/**/*");
 
-const dist = path.resolve(
-  __dirname,
-  "packages/react-cross-ui-boilerplate/dist"
-);
+const dist = path.resolve(__dirname, "dist");
 
 gulp.task("babel", () =>
   gulp

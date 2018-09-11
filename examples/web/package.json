@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "react": "16.4.0",
-    "react-cross-ui-boilerplate": "file:../../packages/react-cross-ui-boilerplate",
+    "react-cross-ui-boilerplate": "file:../..",
     "react-dom": "16.4.0",
     "react-native-web": "^0.8.9",
     "react-scripts": "1.1.5"

@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const root = path.resolve(__dirname, "./packages/react-cross-ui-boilerplate");
+const root = path.resolve(__dirname, "./");
 
 // Base paths to specific folders
 const basePaths = {

@@ -5529,11 +5529,10 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-"react-cross-ui-boilerplate@file:../../packages/react-cross-ui-boilerplate":
+"react-cross-ui-boilerplate@file:../..":
   version "0.1.0"
   dependencies:
     react-native-linear-gradient "^2.4.2"
-    react-native-web-linear-gradient "^1.0.2"
 
 react-dev-utils@^5.0.2:
   version "5.0.2"
@@ -5574,10 +5573,6 @@ react-error-overlay@^4.0.1:
 react-native-linear-gradient@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.4.2.tgz#9d3acd0a198b9d4566e8f6253ef1f60fef0ff2be"
-
-react-native-web-linear-gradient@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-web-linear-gradient/-/react-native-web-linear-gradient-1.0.2.tgz#122dc158273833b315cf0dfc9ded74719fbbc153"
 
 react-native-web@^0.8.9:
   version "0.8.9"

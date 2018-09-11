@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import * as ui from "react-cross-ui-boilterplate";
+import * as ui from "react-cross-ui-boilerplate";
 import logo from "./logo.svg";
 import "./App.css";
 
