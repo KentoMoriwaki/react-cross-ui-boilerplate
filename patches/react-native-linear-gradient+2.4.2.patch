@@ -1,0 +1,10 @@
+patch-package
+--- a/node_modules/react-native-linear-gradient/index.d.ts
++++ b/node_modules/react-native-linear-gradient/index.d.ts
+@@ -11,6 +11,4 @@ declare module "react-native-linear-gradient" {
+     }
+ 
+     export class LinearGradient extends React.Component<LinearGradientProps, any> { }
+-
+-    export default LinearGradient
+ }
