@@ -13,7 +13,8 @@
     "start-ios": "gulp watch --platform=ios",
     "build-ios": "gulp build --platform=ios",
     "start-android": "gulp watch --platform=android",
-    "build-android": "gulp build --platform=android"
+    "build-android": "gulp build --platform=android",
+    "build-all": "yarn run build-ios && yarn run build-android && yarn run build"
   },
   "dependencies": {
     "react-native-linear-gradient": "^2.4.2"
