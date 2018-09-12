@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {
+    "rootDir": "tmp/web"
+  },
+  "include": ["tmp/web/**/*"]
+}

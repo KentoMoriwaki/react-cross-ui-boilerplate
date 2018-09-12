@@ -1,7 +1,19 @@
-import React, { PureComponent } from "react";
+import * as React from "react";
 import { View } from "react-primitives";
 
-class LinearGradient extends PureComponent {
+class LinearGradient extends React.PureComponent<{
+  start?: {
+    x: number;
+    y: number;
+  };
+  end?: {
+    x: number;
+    y: number;
+  };
+  locations?: number[];
+  colors?: string[];
+  style?: any;
+}> {
   static defaultProps = {
     start: {
       x: 0.5,

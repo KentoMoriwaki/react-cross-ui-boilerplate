@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "typeRoots": ["src/types"],
+    "noEmit": true,
+    "sourceMap": false,
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es5", "es6", "es7", "es2018"],
+    "jsx": "react",
+    "allowJs": false,
+    "noImplicitAny": false,
+    "strict": false,
+    "experimentalDecorators": false
+  },
+  "exclude": ["dist", "node_modules"]
+}

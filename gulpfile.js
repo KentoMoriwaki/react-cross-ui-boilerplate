@@ -7,6 +7,8 @@ const gutil = require("gulp-util");
 const argv = require("yargs").argv;
 const cached = require("gulp-cached");
 const babel = require("gulp-babel");
+const ts = require("gulp-typescript");
+const typescript = require("typescript");
 const del = require("del");
 const eol = require("gulp-eol");
 const shell = require("gulp-shell");
@@ -19,7 +21,7 @@ const babelrc = require("./.babelrc");
 // const config = getBuildConfig("ios");
 
 function handleError(err) {
-  console.log(err.toString());
+  console.log(err);
 }
 
 // function normalizePath(path) {
@@ -76,26 +78,26 @@ function handleError(err) {
 
 const platformConfigs = {
   web: {
-    extensions: [".web.jsx", ".web.js", ".jsx", ".js"]
+    extensions: [".web.tsx", ".web.ts", ".tsx", ".ts"]
   },
   ios: {
     extensions: [
-      ".ios.jsx",
-      ".ios.js",
-      ".native.jsx",
-      ".native.js",
-      ".jsx",
-      ".js"
+      ".ios.tsx",
+      ".ios.ts",
+      ".native.tsx",
+      ".native.ts",
+      ".tsx",
+      ".ts"
     ]
   },
   android: {
     extensions: [
-      ".android.jsx",
-      ".android.js",
-      ".native.jsx",
-      ".native.js",
-      ".jsx",
-      ".js"
+      ".android.tsx",
+      ".android.ts",
+      ".native.tsx",
+      ".native.ts",
+      ".tsx",
+      ".ts"
     ]
   }
 };
@@ -151,11 +153,15 @@ function platformify() {
   });
 }
 
+const tsProject = ts.createProject(`tsconfig.${platform}.json`);
+
 gulp.task("copy", () => {
   gulp
     .src(srcGlob)
     .pipe(platformify())
-    .pipe(gulp.dest(paths.dist));
+    .pipe(gulp.dest(paths.dist))
+    .pipe(tsProject({ typescript }))
+    .on("error", handleError);
 });
 
 gulp.task("watch-copy", () =>

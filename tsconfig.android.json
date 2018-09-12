@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {
+    "rootDir": "tmp/android"
+  },
+  "include": ["tmp/android/**/*"]
+}

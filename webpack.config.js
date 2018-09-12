@@ -23,23 +23,24 @@ const config = getConfig(platform, isDev);
 const webpackConfig = env => {
   const platform = env.platform;
 
-  let extensions = [".ts", ".tsx", ".jsx", ".js"];
+  // Load from gulpfile
+  let extensions = [".ts", ".tsx"];
 
   if (platform === "web") {
-    extensions = [".web.jsx", ".web.js", ...extensions];
+    extensions = [".web.tsx", ".web.ts", ...extensions];
   } else if (platform === "ios" || platform === "android") {
     extensions = [
-      `.${platform}.js`,
-      `.${platform}.jsx`,
-      ".native.js",
-      ".native.jsx",
+      `.${platform}.tsx`,
+      `.${platform}.ts`,
+      ".native.tsx",
+      ".native.ts",
       ...extensions
     ];
   }
 
   return {
     context: config.root,
-    entry: "./src/index.jsx",
+    entry: "./src/index",
     mode: isDev ? "development" : "production",
 
     target: "node",
