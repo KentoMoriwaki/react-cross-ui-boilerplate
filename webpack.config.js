@@ -5,6 +5,7 @@
  * Configuration for webpack, the bundling tool used for the web.
  */
 
+const fs = require("fs");
 const path = require("path");
 const webpack = require("webpack");
 const nodeExternals = require("webpack-node-externals");
@@ -16,6 +17,22 @@ const isTest = platform === "tests";
 const babelrc = require("./.babelrc");
 const getConfig = require("./buildconfig.js");
 const config = getConfig(platform, isDev);
+
+function getAliases() {
+  const items = fs.readdirSync(path.resolve(__dirname, "src/modules"));
+  return items.reduce((memo, item) => {
+    memo[`modules/${item}`] = path.resolve(
+      __dirname,
+      "src/modules",
+      item,
+      "index"
+    );
+    return memo;
+  }, {});
+}
+
+const aliases = getAliases();
+console.log(aliases);
 
 /**
  * @type webpack.webpackConfig
@@ -57,8 +74,8 @@ const webpackConfig = env => {
     resolve: {
       modules: [path.resolve("."), path.resolve("./node_modules")],
       // Add '.ts' and '.tsx' as resolvable extensions.
-      extensions
-      // alias: config.aliases
+      extensions,
+      alias: aliases
     },
 
     module: {

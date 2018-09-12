@@ -1,7 +1,15 @@
 {
   "extends": "./tsconfig.base",
   "compilerOptions": {
-    "rootDir": "tmp/ios"
+    "baseUrl": "tmp/ios",
+    "rootDir": "tmp/ios",
+    "paths": {
+      "modules/*": [
+        "./modules/*/index.ios",
+        "./modules/*/index.native",
+        "./modules/*/index"
+      ]
+    }
   },
   "include": ["tmp/ios/**/*"]
 }

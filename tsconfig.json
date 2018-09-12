@@ -1,11 +1,11 @@
 {
   "extends": "./tsconfig.base",
   "compilerOptions": {
-    "baseUrl": "tmp/web",
-    "rootDir": "tmp/web",
+    "baseUrl": "src",
+    "rootDir": "src",
     "paths": {
       "modules/*": ["./modules/*/index.web", "./modules/*/index"]
     }
   },
-  "include": ["tmp/web/**/*"]
+  "include": ["src/**/*"]
 }
