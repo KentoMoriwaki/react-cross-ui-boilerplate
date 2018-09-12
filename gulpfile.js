@@ -83,6 +83,10 @@ function copyFileForPlatform(origFile) {
   const fileName = path.basename(file.path);
   const [baseName, ...extNames] = fileName.split(".");
   const extName = "." + extNames.join(".");
+  if (extName === ".d.ts") {
+    file.path = origFile.path.replace(paths.src, getTempPath());
+    return file;
+  }
   const extIndex = extensions.indexOf(extName);
   if (extIndex < 0) {
     return false;
@@ -95,7 +99,7 @@ function copyFileForPlatform(origFile) {
     return false;
   }
 
-  file.path = file.path
+  file.path = origFile.path
     .replace(paths.src, getTempPath())
     .replace(
       new RegExp(`${fileName}$`),
@@ -157,4 +161,6 @@ gulp.task(
   shell.task(`node_modules/.bin/webpack --watch --env.platform=${platform}`)
 );
 
-gulp.task("watch", ["watch-copy", "tsc-watch", "webpack-watch"]);
+gulp.task("watch", cb =>
+  runSequence("copy", ["watch-copy", "tsc-watch", "webpack-watch"], cb)
+);

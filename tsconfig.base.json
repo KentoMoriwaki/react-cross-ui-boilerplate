@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "typeRoots": ["src/types"],
+    "typeRoots": ["./src/types"],
     "emitDeclarationOnly": true,
     "declaration": true,
     "declarationDir": "dist/types",

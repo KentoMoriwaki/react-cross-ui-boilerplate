@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.base",
   "compilerOptions": {
+    "typeRoots": ["types"],
     "baseUrl": "src",
     "rootDir": "src",
     "paths": {
