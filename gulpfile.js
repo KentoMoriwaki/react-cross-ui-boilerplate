@@ -14,7 +14,7 @@ const runSequence = require("run-sequence");
 const getBuildConfig = require("./buildconfig");
 const babelrc = require("./.babelrc");
 
-const config = getBuildConfig("web");
+const config = getBuildConfig("ios");
 
 function handleError(err) {
   console.log(err.toString());
@@ -66,7 +66,8 @@ gulp.task("babel", () =>
   gulp
     .src(src)
     .pipe(babel(babelrc))
-    .pipe(aliasify(config.aliases))
+    .on("error", handleError)
+    // .pipe(aliasify(config.aliases))
     .pipe(gulp.dest(dist))
     .on("error", handleError)
 );

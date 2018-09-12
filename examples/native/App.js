@@ -9,7 +9,7 @@ export default class App extends React.Component {
         <Text>Open up App.js to start working on your app!</Text>
         <Text>Changes you make will automatically reload.</Text>
         <Text>Shake your phone to open the developer menu.</Text>
-        <ui.Button>Hello, native?</ui.Button>
+        <ui.Button>Hello Button</ui.Button>
       </View>
     );
   }
