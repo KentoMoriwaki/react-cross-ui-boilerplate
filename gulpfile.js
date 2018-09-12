@@ -4,6 +4,7 @@ const path = require("path");
 const eventStream = require("event-stream");
 const gulp = require("gulp");
 const gutil = require("gulp-util");
+const argv = require("yargs").argv;
 const cached = require("gulp-cached");
 const babel = require("gulp-babel");
 const del = require("del");
@@ -72,13 +73,20 @@ gulp.task("babel", () =>
     .on("error", handleError)
 );
 
-gulp.task("build", callback => {
-  runSequence(["babel"], callback);
-});
+// gulp.task("build", callback => {
+//   runSequence(["babel"], callback);
+// });
+
+// Handle args
+const platform = argv.platform || "web";
+gutil.log(gutil.colors.yellow(`platform: ${platform}`));
+
+gulp.task(
+  "build",
+  shell.task(`node_modules/.bin/webpack --env.platform=${platform}`)
+);
 
 gulp.task(
   "watch",
-  shell.task(
-    "node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --watch"
-  )
+  shell.task(`node_modules/.bin/webpack --watch --env.platform=${platform}`)
 );

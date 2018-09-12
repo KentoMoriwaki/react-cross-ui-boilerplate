@@ -40,7 +40,7 @@
     "run-sequence": "^2.2.1",
     "typescript": "^3.0.3",
     "webpack": "^4.17.2",
-    "webpack-command": "^0.4.1",
+    "webpack-cli": "^3.1.0",
     "webpack-node-externals": "^1.7.2"
   }
 }

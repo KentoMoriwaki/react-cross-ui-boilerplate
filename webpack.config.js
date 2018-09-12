@@ -20,64 +20,74 @@ const config = getConfig(platform, isDev);
 /**
  * @type webpack.webpackConfig
  */
-const webpackConfig = {
-  context: config.root,
-  entry: "./src/index.jsx",
-  mode: isDev ? "development" : "production",
+const webpackConfig = env => {
+  const platform = env.platform;
 
-  target: "node",
-  output: {
-    filename: "index.web.js",
-    path: path.resolve(config.root, "dist"),
-    libraryTarget: "commonjs2"
-  },
-  externals: [nodeExternals()],
+  let extensions = [".ts", ".tsx", ".jsx", ".js"];
 
-  // Enable sourcemaps for debugging webpack's output.
-  devtool: "source-map",
+  if (platform === "web") {
+    extensions = [".web.jsx", ".web.js", ...extensions];
+  } else if (platform === "ios" || platform === "android") {
+    extensions = [
+      `.${platform}.js`,
+      `.${platform}.jsx`,
+      ".native.js",
+      ".native.jsx",
+      ...extensions
+    ];
+  }
 
-  resolve: {
-    modules: [path.resolve("."), path.resolve("./node_modules")],
-    // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: [
-      ".webpack.js",
-      ".web.jsx",
-      ".web.js",
-      ".ts",
-      ".tsx",
-      ".jsx",
-      ".js"
-    ],
-    alias: config.aliases
-  },
+  return {
+    context: config.root,
+    entry: "./src/index.jsx",
+    mode: isDev ? "development" : "production",
 
-  module: {
-    rules: [
-      {
-        test: /\.(t|j)sx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: babelrc
+    target: "node",
+    output: {
+      filename: `index.${platform}.js`,
+      path: path.resolve(config.root, "dist"),
+      libraryTarget: "commonjs2"
+    },
+    externals: [nodeExternals()],
+
+    // Enable sourcemaps for debugging webpack's output.
+    devtool: "source-map",
+
+    resolve: {
+      modules: [path.resolve("."), path.resolve("./node_modules")],
+      // Add '.ts' and '.tsx' as resolvable extensions.
+      extensions
+      // alias: config.aliases
+    },
+
+    module: {
+      rules: [
+        {
+          test: /\.(t|j)sx?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader",
+            options: babelrc
+          }
         }
-      }
-    ]
-  },
+      ]
+    },
 
-  plugins: [
-    // Replace flags in the code based on the build variables. This is similar to
-    // the replaceFlags method in gulpfile.js. If you make a change here, reflect
-    // the same change in the other location.
-    new webpack.DefinePlugin({
-      __DEV__: isDev,
-      __TEST__: isTest,
-      __WEB__: true,
-      __ANDROID__: false,
-      __IOS__: false,
-      __WINDOWS__: false,
-      __MACOS__: false
-    })
-  ]
+    plugins: [
+      // Replace flags in the code based on the build variables. This is similar to
+      // the replaceFlags method in gulpfile.js. If you make a change here, reflect
+      // the same change in the other location.
+      new webpack.DefinePlugin({
+        __DEV__: isDev,
+        __TEST__: isTest,
+        __WEB__: true,
+        __ANDROID__: false,
+        __IOS__: false,
+        __WINDOWS__: false,
+        __MACOS__: false
+      })
+    ]
+  };
 };
 
 module.exports = webpackConfig;
