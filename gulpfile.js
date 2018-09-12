@@ -73,28 +73,36 @@ const getTempPath = () => {
 
 const srcGlob = path.resolve(paths.src, "**/*");
 
+function copyFileForPlatform(origFile) {
+  const file = origFile.clone({ contents: false });
+  if (file.isDirectory()) {
+    return false;
+  }
+  // Check the file is exactly for the platform
+  const { extensions } = platformConfigs[platform];
+  const fileName = path.basename(file.path);
+  const [baseName, ...extNames] = fileName.split(".");
+  const extName = "." + extNames.join(".");
+  if (!extensions.includes(extName)) {
+    return false;
+  }
+  file.path = file.path
+    .replace(paths.src, getTempPath())
+    .replace(
+      new RegExp(`${fileName}$`),
+      `${baseName}.${extNames[extNames.length - 1]}`
+    );
+  // Map to tmp path for each platform
+  return file;
+}
+
 function platformify() {
   return eventStream.map((origFile, cb) => {
     // console.log(file.path);
-    const file = origFile.clone({ contents: false });
-    if (file.isDirectory()) {
+    const file = copyFileForPlatform(origFile);
+    if (!file) {
       return cb();
     }
-    // Check the file is exactly for the platform
-    const { extensions } = platformConfigs[platform];
-    const fileName = path.basename(file.path);
-    const [baseName, ...extNames] = fileName.split(".");
-    const extName = "." + extNames.join(".");
-    if (!extensions.includes(extName)) {
-      return cb();
-    }
-    file.path = file.path
-      .replace(paths.src, getTempPath())
-      .replace(
-        new RegExp(`${fileName}$`),
-        `${baseName}.${extNames[extNames.length - 1]}`
-      );
-    // Map to tmp path for each platform
     cb(null, file);
   });
 }
@@ -102,34 +110,42 @@ function platformify() {
 const tsProject = ts.createProject(`tsconfig.${platform}.json`);
 
 gulp.task("copy", () => {
-  gulp
+  return gulp
     .src(srcGlob)
     .pipe(platformify())
     .pipe(gulp.dest(paths.dist))
     .on("error", handleError);
 });
 
-gulp.task("watch-copy", () =>
-  watcher(srcGlob, file => {
-    console.log(file);
-  })
-);
+gulp.task("watch-copy", () => {
+  return watch(srcGlob)
+    .pipe(platformify())
+    .pipe(gulp.dest(paths.dist))
+    .on("error", handleError);
+});
 
 gulp.task(
-  "ts-check",
+  "tsc-check",
   shell.task(`node_modules/.bin/tsc -p tsconfig.${platform}.json`)
 );
 
 gulp.task(
-  "build-webpack",
+  "tsc-watch",
+  shell.task(`node_modules/.bin/tsc -p tsconfig.${platform}.json --watch`)
+);
+
+gulp.task(
+  "webpack-build",
   shell.task(`node_modules/.bin/webpack --env.platform=${platform}`)
 );
 
 gulp.task("build", cb =>
-  runSequence(["copy", "ts-check", "build-webpack"], cb)
+  runSequence(["copy", "tsc-check", "webpack-build"], cb)
 );
 
 gulp.task(
-  "watch",
+  "webpack-watch",
   shell.task(`node_modules/.bin/webpack --watch --env.platform=${platform}`)
 );
+
+gulp.task("watch", ["watch-copy", "tsc-watch", "webpack-watch"]);
