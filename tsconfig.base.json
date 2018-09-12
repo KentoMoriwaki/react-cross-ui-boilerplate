@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "typeRoots": ["src/types"],
-    "noEmit": true,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationDir": "dist/types",
     "sourceMap": false,
     "module": "commonjs",
     "target": "es5",
