@@ -1,17 +1,23 @@
 # react-cross-ui-boilerplate
 
 
-## Build for web
+## Build
 
 ```
-./node_modules/.bin/gulp watch
+yarn run build # build-ios | build-android
+# Or watch
+yarn run start # start-ios | start-android
 ```
+
+## Examples
+
+Before build examples, setup symlinks
 
 ```
 yarn link
 ```
 
-## Example for web
+### Web
 
 ```
 cd examples/web
@@ -20,11 +26,11 @@ yarn link react-cross-ui-boilerplate
 yarn start
 ```
 
-## Example for native
+### Native
 
 ```
 cd examples/native
 yarn install
 yarn link react-cross-ui-boilerplate
-yarn start ios
+yarn start
 ```
