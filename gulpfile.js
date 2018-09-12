@@ -83,9 +83,18 @@ function copyFileForPlatform(origFile) {
   const fileName = path.basename(file.path);
   const [baseName, ...extNames] = fileName.split(".");
   const extName = "." + extNames.join(".");
-  if (!extensions.includes(extName)) {
+  const extIndex = extensions.indexOf(extName);
+  if (extIndex < 0) {
     return false;
   }
+  const notExactly = extensions
+    .slice(0, extIndex)
+    .map(ext => origFile.path.replace(new RegExp(`${extName}$`), ext))
+    .find(path => fs.existsSync(path));
+  if (notExactly) {
+    return false;
+  }
+
   file.path = file.path
     .replace(paths.src, getTempPath())
     .replace(

@@ -32,7 +32,6 @@ function getAliases() {
 }
 
 const aliases = getAliases();
-console.log(aliases);
 
 /**
  * @type webpack.webpackConfig
