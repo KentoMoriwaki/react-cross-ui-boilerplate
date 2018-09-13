@@ -14,7 +14,9 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <ui.Button>Hello, World</ui.Button>
+        <div style={{ marginTop: "50px" }}>
+          <ui.Button>話を聞きに行きたい</ui.Button>
+        </div>
       </div>
     );
   }

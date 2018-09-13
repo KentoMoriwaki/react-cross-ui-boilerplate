@@ -1,8 +1,9 @@
 import * as React from "react";
-import { View, Text, StyleSheet, Animated } from "react-primitives";
+import { Text, StyleSheet, Animated } from "react-primitives";
 import { LinearGradient } from "modules/linear-gradient";
 import { HoverableView } from "modules/hoverable-view";
 import { AnimatedView, createAnimatedStyle, timing } from "modules/animate";
+import { ViewStyle, TextStyle } from "react-native";
 
 class Button extends React.PureComponent<{}, { isHovered: boolean }> {
   state = {
@@ -10,8 +11,8 @@ class Button extends React.PureComponent<{}, { isHovered: boolean }> {
   };
 
   shadowValue = new Animated.Value(1);
-  enterAnim = timing(this.shadowValue, { toValue: 0, duration: 3000 });
-  leaveAnim = timing(this.shadowValue, { toValue: 1, duration: 3000 });
+  enterAnim = timing(this.shadowValue, { toValue: 0.3, duration: 300 });
+  leaveAnim = timing(this.shadowValue, { toValue: 1, duration: 300 });
   animStyle = createAnimatedStyle({
     opacity: {
       value: this.shadowValue
@@ -31,17 +32,18 @@ class Button extends React.PureComponent<{}, { isHovered: boolean }> {
             this.leaveAnim.start();
           }}
           onTouchStart={() => {
-            this.setState({ isHovered: true });
-            this.enterAnim.start();
+            if (this.state.isHovered) {
+              this.setState({ isHovered: false });
+              this.leaveAnim.start();
+            } else {
+              this.setState({ isHovered: true });
+              this.enterAnim.start();
+            }
           }}
         >
           <AnimatedView style={this.animStyle}>
             <LinearGradient
-              colors={
-                this.state.isHovered
-                  ? ["rgb(13, 147, 224)", "rgb(0, 196, 196)"]
-                  : ["rgb(13, 147, 224)", "rgb(0, 196, 0)"]
-              }
+              colors={["rgb(13, 147, 224)", "rgb(0, 196, 196)"]}
               start={{
                 x: 0.0,
                 y: 0.2
@@ -50,7 +52,10 @@ class Button extends React.PureComponent<{}, { isHovered: boolean }> {
                 x: 1.0,
                 y: 0.8
               }}
-              style={[defaultButtonStyle.button, styles.button]}
+              style={[
+                defaultButtonStyle.button,
+                this.state.isHovered ? styles.button : {}
+              ]}
             >
               <Text style={[styles.text]}>{this.props.children}</Text>
             </LinearGradient>
@@ -63,20 +68,34 @@ class Button extends React.PureComponent<{}, { isHovered: boolean }> {
 
 const defaultButtonStyle = StyleSheet.create({
   button: {
-    paddingVertical: 1 * 8,
-    paddingHorizontal: 5 * 8,
-    borderRadius: 3 * 8
+    paddingVertical: 8,
+    paddingHorizontal: 40,
+    borderRadius: 24,
+    shadowColor: "rgba(0, 0, 0, 0.1)",
+    shadowRadius: 6,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    }
   }
 });
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<{
+  button: ViewStyle;
+  text: TextStyle;
+}>({
   button: {
-    borderWidth: 0,
-    backgroundColor: "white"
+    shadowRadius: 12,
+    shadowOffset: {
+      width: 0,
+      height: 4
+    }
   },
   text: {
     color: "white",
-    textAlign: "center"
+    textAlign: "center",
+    fontWeight: "600",
+    lineHeight: 20
   }
 });
 

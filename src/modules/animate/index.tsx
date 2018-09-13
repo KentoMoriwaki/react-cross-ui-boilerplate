@@ -66,7 +66,6 @@ export class AnimatedView extends React.Component<
   componentDidMount() {
     this.animValue._cssListener = (event, options) => {
       if (event === "start") {
-        console.log(options);
         this.setState({
           styles: {
             ...this.state.styles,
@@ -80,8 +79,6 @@ export class AnimatedView extends React.Component<
   }
 
   render() {
-    return React.cloneElement(this.props.children, {
-      style: this.state.styles
-    });
+    return <View style={this.state.styles}>{this.props.children}</View>;
   }
 }
