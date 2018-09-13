@@ -72,10 +72,10 @@ const defaultButtonStyle = StyleSheet.create({
     paddingHorizontal: 40,
     borderRadius: 24,
     shadowColor: "rgba(0, 0, 0, 0.1)",
-    shadowRadius: 6,
+    shadowRadius: 12,
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 4
     }
   }
 });
@@ -85,16 +85,16 @@ const styles = StyleSheet.create<{
   text: TextStyle;
 }>({
   button: {
-    shadowRadius: 12,
+    shadowRadius: 18,
     shadowOffset: {
       width: 0,
-      height: 4
+      height: 6
     }
   },
   text: {
     color: "white",
     textAlign: "center",
-    fontWeight: "600",
+    fontWeight: "500",
     lineHeight: 20
   }
 });
