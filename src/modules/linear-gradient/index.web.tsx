@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View } from "react-primitives";
+import { View } from "react-native";
 
 class LinearGradient extends React.PureComponent<{
   start?: {

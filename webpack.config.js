@@ -18,9 +18,9 @@ const babelrc = require("./.babelrc");
 const getConfig = require("./buildconfig.js");
 const config = getConfig(platform, isDev);
 
-function getAliases() {
+function getAliases(platform) {
   const items = fs.readdirSync(path.resolve(__dirname, "src/modules"));
-  return items.reduce((memo, item) => {
+  const aliases = items.reduce((memo, item) => {
     memo[`modules/${item}`] = path.resolve(
       __dirname,
       "src/modules",
@@ -29,9 +29,11 @@ function getAliases() {
     );
     return memo;
   }, {});
+  if (platform === "web") {
+    aliases["react-native$"] = "react-native-web";
+  }
+  return aliases;
 }
-
-const aliases = getAliases();
 
 /**
  * @type webpack.webpackConfig
@@ -39,9 +41,10 @@ const aliases = getAliases();
 const webpackConfig = env => {
   const platform = env.platform;
 
-  // Load from gulpfile
-  let extensions = [".ts", ".tsx"];
+  const aliases = getAliases(platform);
 
+  // TODO: Load from gulpfile
+  let extensions = [".ts", ".tsx"];
   if (platform === "web") {
     extensions = [".web.tsx", ".web.ts", ...extensions];
   } else if (platform === "ios" || platform === "android") {
