@@ -15,8 +15,8 @@ const isDev = process.env.NODE_ENV !== "production";
 const isTest = platform === "tests";
 
 const babelrc = require("./.babelrc");
-const getConfig = require("./buildconfig.js");
-const config = getConfig(platform, isDev);
+
+const root = path.resolve(__dirname, "./");
 
 function getAliases(platform) {
   const items = fs.readdirSync(path.resolve(__dirname, "src/modules"));
@@ -58,14 +58,14 @@ const webpackConfig = env => {
   }
 
   return {
-    context: config.root,
+    context: root,
     entry: "./src/index",
     mode: isDev ? "development" : "production",
 
     target: "node",
     output: {
       filename: `index.${platform}.js`,
-      path: path.resolve(config.root, "dist"),
+      path: path.resolve(root, "dist"),
       libraryTarget: "commonjs2"
     },
     externals: [nodeExternals()],

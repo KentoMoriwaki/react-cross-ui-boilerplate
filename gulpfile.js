@@ -5,18 +5,9 @@ const eventStream = require("event-stream");
 const gulp = require("gulp");
 const gutil = require("gulp-util");
 const argv = require("yargs").argv;
-const cached = require("gulp-cached");
-const babel = require("gulp-babel");
-const ts = require("gulp-typescript");
-const typescript = require("typescript");
-const del = require("del");
-const eol = require("gulp-eol");
 const shell = require("gulp-shell");
 const watch = require("gulp-watch");
 const runSequence = require("run-sequence");
-
-const getBuildConfig = require("./buildconfig");
-const babelrc = require("./.babelrc");
 
 function handleError(err) {
   console.log(err);
@@ -119,8 +110,6 @@ function platformify() {
     cb(null, file);
   });
 }
-
-const tsProject = ts.createProject(`tsconfig.${platform}.json`);
 
 gulp.task("copy", () => {
   return gulp
