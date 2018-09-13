@@ -1,8 +1,8 @@
 {
   "extends": "./tsconfig.base",
   "compilerOptions": {
-    "baseUrl": "tmp/android",
-    "rootDir": "tmp/android",
+    "baseUrl": "obj/android",
+    "rootDir": "obj/android",
     "paths": {
       "modules/*": [
         "./modules/*/index.android",
@@ -11,5 +11,5 @@
       ]
     }
   },
-  "include": ["tmp/android/**/*"]
+  "include": ["obj/android/**/*"]
 }

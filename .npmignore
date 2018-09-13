@@ -3,6 +3,7 @@ examples
 patches
 src
 tmp
+obj
 .babelrc.js
 .prettierignore
 .tsconfig.

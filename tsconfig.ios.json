@@ -1,8 +1,8 @@
 {
   "extends": "./tsconfig.base",
   "compilerOptions": {
-    "baseUrl": "tmp/ios",
-    "rootDir": "tmp/ios",
+    "baseUrl": "obj/ios",
+    "rootDir": "obj/ios",
     "paths": {
       "modules/*": [
         "./modules/*/index.ios",
@@ -11,5 +11,5 @@
       ]
     }
   },
-  "include": ["tmp/ios/**/*"]
+  "include": ["obj/ios/**/*"]
 }

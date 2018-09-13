@@ -64,11 +64,11 @@ gutil.log(gutil.colors.yellow(`platform: ${platform}`));
 const paths = {
   src: path.resolve(__dirname, "src"),
   dist: path.resolve(__dirname, "dist"),
-  tmp: path.resolve(__dirname, "tmp")
+  obj: path.resolve(__dirname, "obj")
 };
 
-const getTempPath = () => {
-  return path.resolve(paths.tmp, platform);
+const getObjPath = () => {
+  return path.resolve(paths.obj, platform);
 };
 
 const srcGlob = path.resolve(paths.src, "**/*");
@@ -84,7 +84,7 @@ function copyFileForPlatform(origFile) {
   const [baseName, ...extNames] = fileName.split(".");
   const extName = "." + extNames.join(".");
   if (extName === ".d.ts") {
-    file.path = origFile.path.replace(paths.src, getTempPath());
+    file.path = origFile.path.replace(paths.src, getObjPath());
     return file;
   }
   const extIndex = extensions.indexOf(extName);
@@ -100,7 +100,7 @@ function copyFileForPlatform(origFile) {
   }
 
   file.path = origFile.path
-    .replace(paths.src, getTempPath())
+    .replace(paths.src, getObjPath())
     .replace(
       new RegExp(`${fileName}$`),
       `${baseName}.${extNames[extNames.length - 1]}`
