@@ -1,6 +1,6 @@
 {
   "name": "react-cross-ui-boilerplate",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "dist",
   "types": "dist/types/index.d.ts",
   "repository": "https://github.com/KentoMoriwaki/react-cross-ui-boilerplate",
